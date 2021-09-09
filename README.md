@@ -27,7 +27,7 @@ A Flutter Console UI
   }
 ```
 
-![img](/images/demo.png)
+![img](/images/window.png)
 
 #### 功能介绍：
 
@@ -40,6 +40,8 @@ c:清除按钮，可以将当前所有Log清除
 f:折叠按钮，将整个Console Window折叠未一个小窗口，点击小窗口可以恢复大窗口。
 
 Bo:Console Window滚动到最底部
+
+![img](/images/demo.gif)
 
 #### API介绍
 
