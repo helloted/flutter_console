@@ -1,6 +1,6 @@
 name: flutter_console
 description: A Flutter Console UI
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/helloted/flutter_console
 
 environment:
