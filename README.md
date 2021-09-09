@@ -6,16 +6,71 @@ A Flutter Console UI
 
 一个在Flutter端Console可视化的组件，将Console Window置于页面最顶层，用于调试，输出日志等。
 
-#### 快速上手
+#### 安装使用
 
-在根目录执行命令行flutter run，或者在IDE中run
+1、添加依赖
+
+```
+dependencies: 
+	flutter_console: ^0.0.1
+```
+
+2、Pub get
 
 #### 简单Demo
 
-```
+```dart
+import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:flutter_console/flutter_console.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final navKey = GlobalKey<NavigatorState>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      navigatorKey: navKey,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Flutter Console'),
+        ),
+        body: Center(
+          child: GestureDetector(
+            onTap: showLog,
+              child: Container(
+            height: 50,
+            width: 100,
+            color: Colors.purple,
+            child: Center(
+              child: Text(
+                'show',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+            ),
+          )),
+        ),
+      ),
+    );
+  }
+
   void showLog() {
     ConsoleStream logStream = ConsoleStream();
-    ConsoleOverlay().show(baseOverlay:Overlay.of(context)!, contentStream: logStream, y: 300,);
+    ConsoleOverlay().show(baseOverlay:navKey.currentState!.overlay!, contentStream: logStream, y: 300,);
     pushLog(logStream);
   }
 
@@ -25,27 +80,27 @@ A Flutter Console UI
       pushLog(cr);
     });
   }
+}
+
 ```
 
-![img](/images/window.png)
+![img](https://github.com/helloted/flutter_console/blob/main/images/window.png)
 
 #### 功能介绍：
 
-X:关闭按钮，将Console Window关闭
+工具栏从左至右
 
-i:拉伸按钮，用于将Console Window进行上下拉伸
+- 折叠按钮：将整个Console Window折叠未一个小窗口，点击小窗口可以恢复大窗口。
+- 拉伸按钮：用于将Console Window进行上下拉伸
+- 清除按钮：可以将当前所有Log清除
+- 关闭按钮：将Console Window关闭
+- 至底按钮：Console Window滚动到最底部
 
-c:清除按钮，可以将当前所有Log清除
-
-f:折叠按钮，将整个Console Window折叠未一个小窗口，点击小窗口可以恢复大窗口。
-
-Bo:Console Window滚动到最底部
-
-![img](/images/demo.gif)
+![img](https://github.com/helloted/flutter_console/blob/main/images/demo.gif)
 
 #### API介绍
 
-```
+```dart
   void show({required OverlayState baseOverlay, required ConsoleStream contentStream, double y = 200}) {}
   
   baseOverlay:将Console Window置于的overlay层，为了保证在其他页面能够正常显示Window，建议使用navigator的overlay；
