@@ -8,14 +8,7 @@ A Flutter Console UI
 
 #### 安装使用
 
-1、添加依赖
-
-```
-dependencies: 
-	flutter_console: ^0.0.1
-```
-
-2、Pub get
+[安装步骤](https://pub.dev/packages/flutter_console/install)
 
 #### 简单Demo
 

@@ -25,12 +25,22 @@ class ConsoleStream {
     );
   }
 
-  void push(String str) {
+  
+  void push(Object? message) {
     if (!_shouldForward) {
       return;
     }
 
-    controller.add(str);
+    String msg;
+    if (message is Function) {
+      msg = message().toString();
+    } else if (message is String) {
+      msg = message;
+    } else {
+      msg = message.toString();
+    }
+
+    controller.add(msg);
   }
 
   void pause() {
